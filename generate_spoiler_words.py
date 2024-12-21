@@ -46,7 +46,10 @@ def extract_keywords_tfidf(text, num_keywords = 10):
 #NER Name Entity Recognition
 def extract_named_entities(text):
     doc = nlp(text) 
-    return [ent.text for ent in doc.ents]  # Return a list of named entities
+    named_entities = []
+    for ent in doc.ents:
+        named_entities.append(ent)
+    return named_entities
 
 
 
@@ -72,7 +75,6 @@ def generate_keywords(show_name):
         keywords = list(set(tfidf_keywords + named_entities))
         return keywords
 
-
-    except Exception:
-        print(f"Error fetching keywords for {show_name}: {e}")
+    except:
+        print(f"Error fetching keywords for: {show_name}")
         return []
