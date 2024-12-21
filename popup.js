@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const seasonInput = document.getElementById("season");
   const episodeInput = document.getElementById("episode");
 
-  // Fetch shows from TVmaze API
+  // Fetch shows from TVmaze API and populate the dropdown
   fetch("https://api.tvmaze.com/shows")
     .then((response) => response.json())
     .then((shows) => {
@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
     episodeInput.disabled = seasonInput.value === "";
   });
 
-  // Ensure proper validation
-  document.getElementById("spoilerForm").addEventListener("submit", async (e) => {
+  // Form submission for adding a blocked show
+  document.getElementById("spoilerForm").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const show = showSelect.value.trim();
@@ -45,6 +45,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     chrome.storage.sync.get("blocked", (data) => {
       const blocked = data.blocked || [];
+
+      // Check if the show is already blocked
+      if (
+        blocked.some(
+          (entry) =>
+            entry.show === show &&
+            entry.season === season &&
+            entry.episode === episode
+        )
+      ) {
+        alert("This show/season/episode is already blocked!");
+        return;
+      }
+
       blocked.push(newEntry);
       chrome.storage.sync.set({ blocked }, () => {
         displayBlockedShows();
@@ -55,9 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
     episodeInput.disabled = true;
   });
 
+  // Display the currently blocked shows
   displayBlockedShows();
 });
 
+// Initialize the searchable dropdown for selecting shows
 function initializeSearchableDropdown() {
   $("#show").select2({
     placeholder: "Search for a show",
@@ -65,6 +81,7 @@ function initializeSearchableDropdown() {
   });
 }
 
+// Display blocked shows in the popup
 function displayBlockedShows() {
   chrome.storage.sync.get("blocked", (data) => {
     const blocked = data.blocked || [];
@@ -87,6 +104,7 @@ function displayBlockedShows() {
   });
 }
 
+// Remove a blocked show from the list
 function removeBlocked(index) {
   chrome.storage.sync.get("blocked", (data) => {
     const blocked = data.blocked || [];

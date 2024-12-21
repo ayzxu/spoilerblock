@@ -23,3 +23,9 @@ body {
   #show {
     width: 100%;
   }
+
+  .blacked-out {
+    background-color: black;
+    color: black;
+  }
+  

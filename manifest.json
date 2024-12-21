@@ -5,7 +5,7 @@
   "description": "Blocks spoilers for selected shows, seasons, and episodes.",
   "permissions": ["storage", "activeTab", "scripting"],
   "host_permissions": [
-    "https://api.tvmaze.com/*"
+    "https://api.tvmaze.com/*", "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js"
@@ -29,5 +29,11 @@
     "resources": ["keywords.json"],
     "matches": ["<all_urls>"]
   }
-]
+  ],
+  "content_scripts": [
+  {
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }
+  ]
 }
