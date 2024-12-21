@@ -20,5 +20,14 @@
   },
   "icons": {
     "128": "icon.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self';"
+  },
+  "web_accessible_resources": [
+  {
+    "resources": ["keywords.json"],
+    "matches": ["<all_urls>"]
   }
+]
 }

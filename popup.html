@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Spoiler Blocker</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="libs/select2.min.css">
-    <script src="libs/jquery.min.js"></script>
-    <script src="libs/select2.min.js"></script>
-  </head>
+<head>
+  <title>Spoiler Blocker</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="libs/select2.min.css">
+  <script src="libs/jquery.min.js"></script>
+  <script src="libs/select2.min.js"></script>
+</head>
 <body>
   <h1>Spoiler Blocker</h1>
   <form id="spoilerForm">
     <label for="show">Select Show:</label>
-    <select id="show" required style="width: 100%;">
+    <select id="show" required>
       <option value="">-- Search for a Show --</option>
     </select>
 
     <label for="season">Season:</label>
-    <input type="number" id="season" min="1" required />
+    <input type="number" id="season" min="1" />
 
     <label for="episode">Episode:</label>
-    <input type="number" id="episode" min="1" required />
+    <input type="number" id="episode" min="1" />
 
     <button type="submit">Add to Block List</button>
   </form>
@@ -27,10 +27,6 @@
   <h2>Blocked Shows</h2>
   <ul id="blockedShows"></ul>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"
-  ></script>
   <script src="popup.js"></script>
 </body>
 </html>

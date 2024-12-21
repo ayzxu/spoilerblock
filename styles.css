@@ -19,3 +19,7 @@ body {
   button {
     margin-left: 10px;
   }
+
+  #show {
+    width: 100%;
+  }
